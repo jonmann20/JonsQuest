@@ -1,0 +1,36 @@
+{
+  "name": "JonsQuest",
+  "version": "0.0.0",
+  "description": "A 2D platformer in JavaScript.",
+  "main": "index.js",
+  "dependencies": {
+    "grunt": "~0.4.4",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-connect": "~0.7.1",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-cssmin": "~0.9.0",
+    "grunt-concat-sourcemap": "~0.4.0",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-watch": "~0.6.1"
+  },
+  "devDependencies": {
+    "grunt-contrib-connect": "^0.7.1",
+    "grunt-contrib-clean": "^0.4.1",
+    "grunt-contrib-cssmin": "^0.9.0",
+    "grunt-concat-sourcemap": "~0.4.0",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonmann20/JonsQuest.git"
+  },
+  "author": "Jon Wiedmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonmann20/JonsQuest/issues"
+  }
+}
