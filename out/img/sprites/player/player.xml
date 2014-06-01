@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:ee5d5a65ed1a8bd6163675c6239b8ead:46a553d02f61c54da64c6647d1871797:6c45f23d1211d37495dbafcfd7f348f6$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+-->
+<TextureAtlas imagePath="player.png" width="52" height="1141">
+    <sprite n="playerDown.png" x="2" y="2" w="48" h="65"/>
+    <sprite n="playerDown_breatheIn.png" x="2" y="69" w="48" h="65"/>
+    <sprite n="playerDown_breatheOut.png" x="2" y="136" w="48" h="65"/>
+    <sprite n="playerDown_flexL.png" x="2" y="203" w="48" h="65"/>
+    <sprite n="playerDown_flexR.png" x="2" y="270" w="48" h="65"/>
+    <sprite n="playerLeft.png" x="2" y="337" w="48" h="65"/>
+    <sprite n="playerLeft_Run1.png" x="2" y="404" w="48" h="65"/>
+    <sprite n="playerLeft_Run2.png" x="2" y="471" w="48" h="65"/>
+    <sprite n="playerLeft_Run3.png" x="2" y="538" w="48" h="65"/>
+    <sprite n="playerLeft_Step.png" x="2" y="605" w="48" h="65"/>
+    <sprite n="playerPicked.png" x="2" y="672" w="48" h="65"/>
+    <sprite n="playerRight.png" x="2" y="739" w="48" h="65"/>
+    <sprite n="playerRight_Run1.png" x="2" y="806" w="48" h="65"/>
+    <sprite n="playerRight_Run2.png" x="2" y="873" w="48" h="65"/>
+    <sprite n="playerRight_Run3.png" x="2" y="940" w="48" h="65"/>
+    <sprite n="playerRight_Step.png" x="2" y="1007" w="48" h="65"/>
+    <sprite n="playerUp.png" x="2" y="1074" w="48" h="65"/>
+</TextureAtlas>

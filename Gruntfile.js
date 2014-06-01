@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
 	// configure tasks
 	grunt.initConfig({
-	    clean: ["css/jonsQuest.min.css", "js/jonsQuest.min.js"],
+	    clean: ["out/css", "out/js"],
 
 	    connect: {
 	        server: {
@@ -20,9 +20,8 @@ module.exports = function(grunt) {
 	        },
 
 	        jonsQuestJs: {
-	            dest: "js/jonsQuest.min.js",
+	            dest: "out/js/jonsQuest.js",
 	            src: [
-                "js/plugins/jquery.colorbox-min.js",
                 "js/physics/SAT.js",
 	              "js/utils.js",
 	        			"js/audio/audio.js",
@@ -48,7 +47,7 @@ module.exports = function(grunt) {
 	        },
 
 	        css: {
-	            dest: "css/jonsQuest.min.css",
+	            dest: "out/css/jonsQuest.css",
 	            src: "css/jonsQuest.css"
 	        }
 	    },
