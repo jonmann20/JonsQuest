@@ -52,6 +52,18 @@ module.exports = function(grunt) {
 	        }
 	    },
 
+	    copy: {
+	    	main: {
+	    		files: [
+	    			{
+	    				expand: true,
+	    				src: ["img/**", "audio/**"],
+	    				dest: "out/"
+	    			}
+    			]
+	    	}
+	    },
+
 	    watch: {
 	        options: {
 	            livereload: true
@@ -71,7 +83,7 @@ module.exports = function(grunt) {
 	    uglify: {
 	        jonsQuestJs: {
 	            files: {
-	                "<%= concat_sourcemap.jonsQuestJs.dest %>": ["<%= concat_sourcemap.jonsQuestJs.src %>"]//["js/analytics.js", "js/clientSideLogging", "<%= concat_sourcemap.pageJonsQuestJs.src %>"]
+	                "<%= concat_sourcemap.jonsQuestJs.dest %>": ["<%= concat_sourcemap.jonsQuestJs.src %>"]
 	            }
 	        }
 	    },
@@ -81,16 +93,17 @@ module.exports = function(grunt) {
 	    }
 	});
 
-   // external tasks (plugins)
+  // external tasks (plugins)
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-connect");
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
 	grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-watch");
+  grunt.loadNpmTasks("grunt-contrib-copy");
 	grunt.loadNpmTasks("grunt-concat-sourcemap");
   
   // task runner options
 	grunt.registerTask("default", ["concat_sourcemap", "connect", "watch"]);
 	grunt.registerTask("srv", ["connect", "watch"]);
-	grunt.registerTask("prd", ["uglify", "cssmin"]);
+	grunt.registerTask("prd", ["uglify", "cssmin", "copy"]);
 };
