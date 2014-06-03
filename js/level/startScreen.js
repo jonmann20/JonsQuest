@@ -10,7 +10,7 @@ function StartScreen() {
 StartScreen.prototype = (function() {
     var copyTitle1 = "JON'S",
         copyTitle2 = "QUEST",
-        copyLine = String.fromCharCode("169") + " 2013 JON WIEDMANN"
+        copyLine = String.fromCharCode("169") + " 2014 JON WIEDMANN"
     ;
 
     return {

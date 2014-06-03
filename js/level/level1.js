@@ -10,14 +10,14 @@ var lvl1 = (function () {
     ;
 
     function setBackground() {
-        //---- color layer
+        // color layer
         level.bgColor.gradX = door.pos.x + door.w/2;
         level.bgColor.gradY = door.pos.y + door.h/2;
 
         level.bgColor.fillStyle = Graphics.getDoorBgGrad();
 
-        //---- objects
-        Graphics.setClouds();
+        // objects
+        Graphics.setClouds(lvl1.width);
     }
 
     function setObjs() {
@@ -35,7 +35,7 @@ var lvl1 = (function () {
 
 
         // stairs, platform, and door
-        var stairs = new GameObj(JQObject.SLOPE, 2143, 208, 252, 62, null, Dir.UP_RIGHT);
+        var stairs = new GameObj(JQObject.SLOPE, 2203, 208, 252, 62, null, Dir.UP_RIGHT);
         var doorPlat = new GameObj(JQObject.PLATFORM, stairs.pos.x + stairs.w - 11, stairs.pos.y - stairs.h - 5, 200, 62);
         door = new GameObj(JQObject.DOOR, doorPlat.pos.x + doorPlat.w - 63, doorPlat.pos.y - 62 - Graphics.projectY / 2, 33, 62);
         level.objs.push(doorPlat, stairs, door);
@@ -44,10 +44,12 @@ var lvl1 = (function () {
         ladder = new GameItem(new GameObj(JQObject.LADDER, stairs.pos.x - 37, stairs.pos.y - 1, 38, FULLH - stairs.pos.y - game.padFloor), false, 0, false);
         ladder.collidable = false;      // allows ladder to not be in normal collision detection
         level.objs.push(ladder);
-
     }
 
-    function setItems() {        // crates        var crate = [];        for (var i = 0; i < 3; ++i) {
+    function setItems() {
+        // crates
+        var crate = [];
+        for (var i = 0; i < 3; ++i) {
             crate.push(
                 new GameItem(
                     new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 34, 37, "crate.png"),
@@ -56,7 +58,9 @@ var lvl1 = (function () {
             );
         }
         crate[1].pos.x = theScale[Dir.LEFT].pos.x + theScale[Dir.LEFT].w / 2 - crate[0].w / 2;
-        crate[2].pos.x = theScale[Dir.RIGHT].pos.x + theScale[Dir.RIGHT].w / 2 - crate[0].w / 2;        // sack
+        crate[2].pos.x = theScale[Dir.RIGHT].pos.x + theScale[Dir.RIGHT].w / 2 - crate[0].w / 2;
+
+        // sack
         var sack = new GameItem(new GameObj(JQObject.SACK, 680, 111 + Graphics.projectY / 2, 30, 34, "sack.png"), false, 5);
 
         // hidden cash; TODO: only add to level.items after visible???
@@ -74,19 +78,22 @@ var lvl1 = (function () {
             1600,
             false
         );
-        cyborg.collidable = false;  // TODO: fix api        level.enemies.push(cyborg);
+        cyborg.collidable = false;  // TODO: fix api
+        level.enemies.push(cyborg);
     }
 
 
     return {
-        width: 2650,
+        width: 2710,
 
 
         init: function () {
             level.hiddenItems = 1;
-            setObjs();            setItems();
-            setEnemies();
 
+            setObjs();
+            setItems();
+            setEnemies();
+            
             setBackground();
         },
 

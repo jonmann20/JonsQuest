@@ -8,7 +8,7 @@ var lvlComplete = (function () {
                 lastKeyDown = KeyCode.EMPTY;
 
                 level.reset();
-
+                
                 switch (++game.lvl) {
                     case 1:
                         lvl1.init();

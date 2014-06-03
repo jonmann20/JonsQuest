@@ -89,17 +89,31 @@ var hero = (function () {
 		}
 		else {
 		    hero.idleTime = 0;
+
+		    if (hero.isHolding) {
+		        hero.curItem.pos.y = hero.pos.y + 20;
+		    }
 		}
 
 		if (hero.idleTime > 210) {
 		    var foo = hero.idleTime % 200;
 		    
-		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150 || hero.isHolding)
+		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150)
 		        pos = spriteArr["playerDown"];
-		    else if (foo > 50  && foo <= 100)
+		    else if (foo > 50 && foo <= 100) {
 		        pos = spriteArr["playerDown_breatheIn"];
-		    else if (foo > 150 && foo <= 200)
+
+		        if (hero.isHolding) {
+		            hero.curItem.pos.y = hero.pos.y + 18;
+		        }
+		    }
+		    else if (foo > 150 && foo <= 200) {
 		        pos = spriteArr["playerDown_breatheOut"];
+
+		        if (hero.isHolding) {
+		            hero.curItem.pos.y = hero.pos.y + 22;
+		        }
+		    }
 		}
 
         // invincible

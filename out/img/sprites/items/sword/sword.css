@@ -1,0 +1,16 @@
+/* ----------------------------------------------------
+   created with http://www.texturepacker.com 
+   ----------------------------------------------------
+   $TexturePacker:SmartUpdate:15e21d8210f91ea0e2392b68bc05a6cf$
+   ----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(sword.png);}
+
+.swordD {width:9px; height:20px; background-position: -2px -2px}
+.swordU {width:9px; height:20px; background-position: -13px -2px}

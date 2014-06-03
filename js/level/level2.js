@@ -27,7 +27,7 @@ var lvl2 = (function () {
         level.bgColor.gradY = door.pos.y;
 
         level.bgColor.fillStyle = Graphics.getDoorBgGrad();
-        Graphics.setClouds();
+        Graphics.setClouds(lvl2.width);
     }
 
     function setObjs() {

@@ -9,7 +9,8 @@ var Graphics = (function () {
         canvasTransition = null,
         swellN = 250,
         swellTimer = swellN,
-        swellRadius = swellN
+        swellRadius = swellN,
+        cloundMaxY = 170
     ;
 
     return {
@@ -112,20 +113,29 @@ var Graphics = (function () {
             return poly;
         },
 
-        setClouds: function(){
-            var x = 0,
-                y = 0,
-                maxY = 180
-            ;
-
-            while(x < lvl1.width) {
-                var obj = new GameObj(JQObject.CLOUD, x, 10 + y, 0, 0, "cloud.png");
-                obj.speed = utils.randF(2, 3.3, 1);
-                level.bg.push(obj);
-
-                x += obj.w * utils.speed2scale(obj.speed) + Math.floor((Math.random() * 70) + 35);
-                y = Math.floor(Math.random() * maxY);
+        setClouds: function(width){
+            var x = 0;
+            
+            while(x < width) {
+                x = Graphics.spawnCloud(x);
             }
+        },
+
+        spawnCloud: function (x) {
+            var y = Math.floor(Math.random() * cloundMaxY);
+            var speed = utils.randF(2, 3.3, 1);
+            var width = utils.speed2scale(speed) * 120; // 120px is clound.png width; TODO: fix GameObj image width calculation
+
+            x += width + Math.floor((Math.random() * 20) + 8);
+
+            var obj = new GameObj(JQObject.CLOUD, x, 10 + y, 0, 0, "cloud.png");
+            obj.speed = speed;
+            obj.distTraveled = 0;
+            obj.distToTravel = x + width;
+
+            level.bg.push(obj);
+
+            return x;
         },
 
         drawLadder: function (platform) {

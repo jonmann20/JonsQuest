@@ -29,10 +29,11 @@ var level = (function () {
         level.bgColor.fillStyle = Graphics.getDoorBgGrad();
 
         // objects
-        for(var i = 0; i < level.bg.length; ++i) {
-            level.bg[i].pos.x -= hero.vX / level.bg[i].speed;
+        for (var i = 0; i < level.bg.length; ++i) {
+            var dtX = hero.vX / level.bg[i].speed;
+            level.bg[i].pos.x -= dtX;
+            level.bg[i].distTraveled += dtX;
         }
-
     }
 
     function updateEnemiesView() {
@@ -292,7 +293,6 @@ var level = (function () {
 
             Graphics.fadeCanvas(function () {
                 level.isTransitioning = false;
-
                 level.curLvl = lvlComplete;
                 level.isCutscene = true;
                 level.time = game.actualTime;
@@ -304,8 +304,23 @@ var level = (function () {
         /******************** Update ********************/
         update: function () {
             if (!level.isTransitioning) {
-                updateItems();
-                updateEnemies();
+                if (game.lvl != 0) {
+                    updateItems();
+                    updateEnemies();
+
+                    // bg objects
+                    var i = level.bg.length;
+                    while (i--) {
+                        var dtX = 0.5 / level.bg[i].speed;
+                        level.bg[i].pos.x -= dtX;
+                        level.bg[i].distTraveled += dtX;
+
+                        if (level.bg[i].distTraveled > level.bg[i].distToTravel) {
+                            level.bg.splice(i, 1);
+                            Graphics.spawnCloud(level.curLvl.width);
+                        }
+                    }
+                }
 
                 level.curLvl.update();
             }
