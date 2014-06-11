@@ -12,8 +12,9 @@ var lvl1 = (function () {
     function setBackground() {
         // color layer
         level.bgColor.gradX = door.pos.x + door.w/2;
-        level.bgColor.gradY = door.pos.y + door.h/2;
-
+        level.bgColor.gradY = door.pos.y + door.h / 2;
+        level.bgColor.c0 = "rgb(203,163,0)";
+        level.bgColor.c1 = "#1F7DCF";
         level.bgColor.fillStyle = Graphics.getDoorBgGrad();
 
         // objects
@@ -105,11 +106,6 @@ var lvl1 = (function () {
         },
 
         update: function () {
-            // TODO: move to better location
-            if (window.DEBUG) {
-                level.complete();
-            }
-
             if(doLadder) {
                 hero.onLadder = SAT.testPolygonPolygon(hero, ladder);
             }

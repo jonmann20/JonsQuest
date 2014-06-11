@@ -20,8 +20,11 @@ var Main = (function () {
 
     function debug() {
         // dev enviroment
-        if (location.host === "jon") {
+        if (location.hostname === "jonsquest") {
             window.DEBUG = true;
+            window.DEBUG_OPT = {
+                'lvl': 3
+            };
 
             // speed up canvas transition
             $(canvas).css({"transition": "opacity 0.01s"});
@@ -30,7 +33,7 @@ var Main = (function () {
             lastKeyDown = KeyCode.ENTER;
 
             // mute audio
-            audio.handleMuteButton();
+            //audio.handleMuteButton();
         }
     }
 

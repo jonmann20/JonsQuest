@@ -2,28 +2,46 @@
 
 var lvlComplete = (function () {
 
+    function complete(debugLvl) {
+        lastKeyDown = KeyCode.EMPTY;
+        level.reset();
+
+        if (debugLvl != null) {
+            game.lvl = debugLvl;
+        }
+        else {
+            ++game.lvl;
+        }
+
+        switchLevel(game.lvl);
+        level.isCutscene = false;
+    }
+
+    function switchLevel(lvl) {
+        switch (lvl) {
+            case 1:
+                lvl1.init();
+                level.curLvl = lvl1;
+                break;
+            case 2:
+                lvl2.init();
+                level.curLvl = lvl2;
+                break;
+            case 3:
+                var lvl3 = new Level3();
+                level.curLvl = lvl3;
+        }
+
+        audio.updateBgMusic();
+    }
+
     return {
         update: function () {
-            if (keysDown[KeyCode.ENTER] || game.lvl === 0 || (window.DEBUG && game.lvl === 1)) {
-                lastKeyDown = KeyCode.EMPTY;
-
-                level.reset();
-                
-                switch (++game.lvl) {
-                    case 1:
-                        lvl1.init();
-                        level.curLvl = lvl1;
-                        break;
-                    case 2:
-                        lvl2.init();
-                        level.curLvl = lvl2;
-                        break;
-                    case 3:
-                        var lvl3 = new Level3();
-                        level.curLvl = lvl3;
-                }
-
-                level.isCutscene = false;
+            if (window.DEBUG) {
+                complete(window.DEBUG_OPT['lvl']);
+            }
+            else if (keysDown[KeyCode.ENTER] || game.lvl === 0) {
+                complete();
             }
         },
 

@@ -1,36 +1,36 @@
 ﻿// Audio
-/// <reference path="/games/jonsQuest/js/audio/audio.js" />
+/// <reference path="/js/audio/audio.js" />
 
 // Enemy
-/// <reference path="/games/jonsQuest/js/enemy/enemy.js" />
+/// <reference path="/js/enemy/enemy.js" />
 
 // Engine
-/// <reference path="/games/jonsQuest/js/engine/gameItem.js" />
-/// <reference path="/games/jonsQuest/js/engine/gameObject.js" />
-/// <reference path="/games/jonsQuest/js/engine/game.js" />
-/// <reference path="/games/jonsQuest/js/engine/hud.js" />
+/// <reference path="/js/engine/gameItem.js" />
+/// <reference path="/js/engine/gameObject.js" />
+/// <reference path="/js/engine/game.js" />
+/// <reference path="/js/engine/hud.js" />
 
 // Graphics
-/// <reference path="/games/jonsQuest/js/graphics/graphics.js" />
+/// <reference path="/js/graphics/graphics.js" />
 
 // Hero
-/// <reference path="/games/jonsQuest/js/hero/hero.js" />
-/// <reference path="/games/jonsQuest/js/hero/heroInput.js" />
-/// <reference path="/games/jonsQuest/js/hero/heroGraphics.js" />
-/// <reference path="/games/jonsQuest/js/hero/heroPhysics.js" />
+/// <reference path="/js/hero/hero.js" />
+/// <reference path="/js/hero/heroInput.js" />
+/// <reference path="/js/hero/heroGraphics.js" />
+/// <reference path="/js/hero/heroPhysics.js" />
 
 // Level
-/// <reference path="/games/jonsQuest/js/level/level.js" />
-/// <reference path="/games/jonsQuest/js/level/lvlComplete.js" />
-/// <reference path="/games/jonsQuest/js/level/level0.js" />
-/// <reference path="/games/jonsQuest/js/level/level1.js" />
-/// <reference path="/games/jonsQuest/js/level/level3.js" />
-/// <reference path="/games/jonsQuest/js/level/startScreen.js" />
+/// <reference path="/js/level/level.js" />
+/// <reference path="/js/level/lvlComplete.js" />
+/// <reference path="/js/level/level0.js" />
+/// <reference path="/js/level/level1.js" />
+/// <reference path="/js/level/level3.js" />
+/// <reference path="/js/level/startScreen.js" />
 
 // Other
-/// <reference path="/games/jonsQuest/js/main.js" />
-/// <reference path="/games/jonsQuest/js/utils.js" />
+/// <reference path="/js/main.js" />
+/// <reference path="/js/utils.js" />
 
 // Physics
-/// <reference path="/games/jonsQuest/js/physics/SAT.js" />
-/// <reference path="/games/jonsQuest/js/physics/physics.js" />
+/// <reference path="/js/physics/SAT.js" />
+/// <reference path="/js/physics/physics.js" />

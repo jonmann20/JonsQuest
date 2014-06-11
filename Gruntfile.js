@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 	    connect: {
 	        server: {
 	            options: {
-	                hostname: "jonsQuest",
+	                hostname: "jonsquest",
 	                port: 180,
 	                open: true
 	            }
@@ -22,27 +22,27 @@ module.exports = function(grunt) {
 	        jonsQuestJs: {
 	            dest: "out/js/jonsQuest.js",
 	            src: [
-                "js/physics/SAT.js",
-	              "js/utils.js",
-	        			"js/audio/audio.js",
-	        			"js/graphics/graphics.js",
-	        			"js/physics/physics.js",
-	        			"js/engine/gameObject.js",
-	        			"js/engine/gameItem.js",
-                "js/engine/hud.js",
-	        			"js/enemy/enemy.js",
-	        			"js/level/level.js",
-                "js/level/lvlComplete.js",
-                "js/level/startScreen.js",
-	        			"js/level/level1.js",
-                "js/level/level2.js",        // TODO load new levels/assets dynamically?
-                "js/level/level3.js",
-	        			"js/engine/game.js",
-	        			"js/hero/hero.js",
-	        			"js/hero/heroGraphics.js",
-	        			"js/hero/heroPhysics.js",
-	        			"js/hero/heroInput.js",
-	        			"js/main.js"
+                    "js/physics/SAT.js",
+	                "js/utils.js",
+	        	    "js/audio/audio.js",
+	        	    "js/graphics/graphics.js",
+	        	    "js/physics/physics.js",
+	        	    "js/engine/gameObject.js",
+	        	    "js/engine/gameItem.js",
+                    "js/engine/hud.js",
+	        	    "js/enemy/enemy.js",
+	        	    "js/level/level.js",
+                    "js/level/lvlComplete.js",
+                    "js/level/startScreen.js",
+	        	    "js/level/level1.js",
+                    "js/level/level2.js",        // TODO load new levels/assets dynamically?
+                    "js/level/level3.js",
+	        	    "js/engine/game.js",
+	        	    "js/hero/hero.js",
+	        	    "js/hero/heroGraphics.js",
+	        	    "js/hero/heroPhysics.js",
+	        	    "js/hero/heroInput.js",
+	        	    "js/main.js"
 	            ]
 	        },
 
@@ -93,17 +93,17 @@ module.exports = function(grunt) {
 	    }
 	});
 
-  // external tasks (plugins)
+    // external tasks (plugins)
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-connect");
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
 	grunt.loadNpmTasks("grunt-contrib-clean");
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-contrib-copy");
+    grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-contrib-copy");
 	grunt.loadNpmTasks("grunt-concat-sourcemap");
   
-  // task runner options
-	grunt.registerTask("default", ["concat_sourcemap", "connect", "watch"]);
+    // task runner options
+    grunt.registerTask("default", ["concat_sourcemap", "connect", "watch"]);
 	grunt.registerTask("srv", ["connect", "watch"]);
 	grunt.registerTask("prd", ["uglify", "cssmin", "copy"]);
 };

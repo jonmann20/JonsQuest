@@ -428,10 +428,10 @@ var Graphics = (function () {
                 --swellRadius;
             }
 
-            grad.addColorStop(0, "rgb(203,163,0)");
+            grad.addColorStop(0, level.bgColor.c0);
             //grad.addColorStop(0, "rgb(42,126,76)");
             //grad.addColorStop(1, "rgb(22,106,56)");
-            grad.addColorStop(1, "#1F7DCF");
+            grad.addColorStop(1, level.bgColor.c1);
 
             return grad;
         },

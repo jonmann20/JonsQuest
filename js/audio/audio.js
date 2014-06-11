@@ -47,10 +47,38 @@
             switch(game.lvl) {
                 case 0:
                     audio.enterSound.play();
-                    newBgMusic = "inspiredBySparkMan/sparkBoy.mp3";
-                    break;
+                    return;
                 default:
                     audio.exitSound.play();
+                    newBgMusic = "sweetAcoustic.mp3";
+                    break;
+            }
+
+            setTimeout(function () {
+                audio.bgMusic = new Audio("audio/" + newBgMusic);
+                audio.bgMusic.loop = true;
+                audio.bgMusic.volume = 0.45;
+
+                audio.isOn ?
+                    audio.bgMusic.play() :
+                    audio.bgMusic.pause();
+            }, 1000);
+        },
+
+        updateBgMusic: function() {
+            audio.bgMusic.pause();
+
+            var newBgMusic;
+
+            switch(game.lvl) {
+                case 1:
+                case 2:
+                    newBgMusic = "inspiredBySparkMan/sparkBoy.mp3";
+                    break;
+                case 3:
+                    newBgMusic = "bossBeat/bossBeat.mp3";
+                    break;
+                default:
                     newBgMusic = "sweetAcoustic.mp3";
                     break;
             }
