@@ -3,8 +3,7 @@ Jon's Quest
 
 A 2D platformer in JavaScript.
 
-
-[Play Game](http://jonmann20.github.io/games/jonsQuest/)
+[Play Game](http://jonw.me/games/jonsQuest)
 
 ![hero](http://jonmann20.github.io/games/common/img/player/playerDown.png) 
 ![hero back](http://jonmann20.github.io/games/common/img/player/playerUp.png) 
