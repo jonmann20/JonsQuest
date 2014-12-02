@@ -5,11 +5,20 @@ module.exports = function(grunt) {
 	    clean: ["out/css", "out/js"],
 
 	    connect: {
-	        server: {
+	        dev: {
 	            options: {
 	                hostname: "jonsquest",
 	                port: 180,
 	                open: true
+	            }
+	        },
+
+	        srv: {
+	            options: {
+	                hostname: "jonsquest",
+	                port: 180,
+	                open: true,
+	                keepalive: true
 	            }
 	        }
 	    },
@@ -54,13 +63,11 @@ module.exports = function(grunt) {
 
 	    copy: {
 	    	main: {
-	    		files: [
-	    			{
-	    				expand: true,
-	    				src: ["img/**", "audio/**"],
-	    				dest: "out/"
-	    			}
-    			]
+	    		files: [{
+	    			expand: true,
+	    			src: ["img/**", "audio/**"],
+	    			dest: "out/"
+	    		}]
 	    	}
 	    },
 
@@ -81,6 +88,12 @@ module.exports = function(grunt) {
 	    },
 
 	    uglify: {
+	        options: {
+	            compress: {
+	                drop_console: true
+	            }
+	        },
+
 	        jonsQuestJs: {
 	            files: {
 	                "<%= concat_sourcemap.jonsQuestJs.dest %>": ["<%= concat_sourcemap.jonsQuestJs.src %>"]
@@ -93,7 +106,6 @@ module.exports = function(grunt) {
 	    }
 	});
 
-    // external tasks (plugins)
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-connect");
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
@@ -102,8 +114,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
 	grunt.loadNpmTasks("grunt-concat-sourcemap");
   
-    // task runner options
-    grunt.registerTask("default", ["concat_sourcemap", "connect", "watch"]);
-	grunt.registerTask("srv", ["connect", "watch"]);
+
+    grunt.registerTask("default", ["concat_sourcemap", "connect:dev", "watch"]);
+	grunt.registerTask("srv", ["connect:srv"]);
 	grunt.registerTask("prd", ["uglify", "cssmin", "copy"]);
 };
