@@ -28,14 +28,14 @@
             audio.discovery.volume = 0.7;
 
             audio.mute(true);
-            $(document).on("click", ".audioState", audio.handleMuteButton);
+            $(document).on('click', '.audioState', audio.handleMuteButton);
 
-            $(".menu").on("click", function (e) {
+            $('.menu').on('click', function(e) {
                 e.preventDefault();
                 utils.toggleMenu();
-            })
+            });
 
-            //----- enable audio on start -----
+            // enable audio on start
             audio.handleMuteButton()
         },
 
@@ -54,8 +54,8 @@
                     break;
             }
 
-            setTimeout(function () {
-                audio.bgMusic = new Audio("audio/" + newBgMusic);
+            setTimeout(function() {
+                audio.bgMusic = new Audio('audio/' + newBgMusic);
                 audio.bgMusic.loop = true;
                 audio.bgMusic.volume = 0.45;
 
@@ -108,16 +108,16 @@
             }
         },
 
-        handleMuteButton: function () {
+        handleMuteButton: function() {
             if ($('.audioState').hasClass('off')) {
-                $('.audioState span').removeClass('icon-volume-mute').addClass('icon-volume-medium');
+                $('.audioState iron-icon').attr('icon', 'av:volume-up');
                 $('.audioState').removeClass('off');
                 $('.audioState').addClass('on');
 
                 audio.mute(false);
             }
             else {
-                $('.audioState span').removeClass('icon-volume-medium').addClass('icon-volume-mute');
+                $('.audioState iron-icon').attr('icon', 'av:volume-off');
                 $('.audioState').removeClass('on');
                 $('.audioState').addClass('off');
 

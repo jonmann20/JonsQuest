@@ -1,93 +1,95 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="icon" type="image/ico" href="/img/favicon.ico">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="icon" type="image/ico" href="/img/favicon.ico">
 
-    <meta property="og:title" content="Jon's Quest" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://jonmann20.github.io/games/jonsQuest/" />
-    <meta property="og:image" content="http://jonmann20.github.io/games/dungeon/web/img/player/playerDown.png" />
-    <meta property="og:description" content="Jon's Quest is a 2D html5 canvas game." />
+	<meta property="og:title" content="Jon's Quest">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="http://jonmann20.github.io/games/jonsQuest/">
+	<meta property="og:image" content="http://jonmann20.github.io/games/dungeon/web/img/player/playerDown.png">
+	<meta property="og:description" content="Jon's Quest is a 2D html5 canvas game.">
 
-    <meta name="description" content="Jon's Quest is a 2D html5 canvas game." />
-    <meta name="keywords" content="canvas, html5, javascript, game" />
+	<meta name="description" content="Jon's Quest is a 2D html5 canvas game.">
+	<meta name="keywords" content="canvas, html5, javascript, game">
 
-    <title>Jon&#700;s Quest | Games</title>
+	<title>Jon's Quest | Games</title>
 
-    <!-- <link href="/css/overrideUtils.css" rel="stylesheet">
-    <link href="/css/plugins/colorbox.css" rel="stylesheet"> -->
-    <link href="css/jonsQuest.css" rel="stylesheet">
+	<link href="/node_modules/jquery-colorbox/example3/colorbox.css" rel="stylesheet">
+	<link href="out/css/jons-quest-main.css" rel="stylesheet">
+	
+	<link rel="import" href="/bower_components/iron-icon/iron-icon.html">
+	<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+	<link rel="import" href="/bower_components/iron-icons/av-icons.html">
 </head>
 <body>
-    <header>
-        <h1>Jon's Quest</h1>
+	<header>
+		<h1>Jon's Quest</h1>
 
-        <a href="/#games">Back</a>
-        <a href="#" class="menu">Game Menu</a>
-    </header>
+		<a href="/#games">Back</a>
+		<a href="#" class="menu">Game Menu</a>
+	</header>
 
-    <div class="canvasWrap">
-        <div class="minW">
-            Browser window must be at least 1008px wide to play.
-        </div>
+	<div class="canvasWrap">
+		<div class="minW">
+			Browser window must be at least 1008px wide to play.
+		</div>
 
-        <!-- 16:9 * 63 -->
-        <canvas width="1008" height="567" class="preTransition">
-            Unsupported browser =(.  Try <a href="https://www.google.com/intl/en/chrome/browser/" target="_blank">Google Chrome</a>.
-        </canvas>
-    </div>
+		<!-- 16:9 * 63 -->
+		<canvas width="1008" height="567" class="preTransition"></canvas>
+	</div>
 
-    <div class="gameInstructions">
-        <h2>Game Menu</h2>
-        <ul class="goals">
-            <li><span>GOAL:</span> Become the world's most powerful ninja.</li>
-        </ul>
-        <ul>
-            <li>
-                <span class="keyAction">W:</span> up
-            </li>
-            <li>
-                <span class="keyAction">A:</span> left
-            </li>
-            <li>
-                <span class="keyAction">S:</span> down
-            </li>
-            <li class="padBot">
-                <span class="keyAction">D:</span> right
-            </li>
-            <li>
-                <span class="keyAction">J:</span> throw
-            </li>
-            <li>
-                <span class="keyAction">K:</span> jump
-            </li>
-            <li class="padBot">
-                <span class="keyAction">SPACEBAR</span> drop
-            </li>
-            <li>
-                <span class="keyAction">H:</span> heal
-            </li>
-            <li class="padBot">
-                <span class="keyAction">R:</span> restore
-            </li>
-            <li class="padBot">
-                <span class="keyAction">O:</span> menu
-            </li>
-            <li class="audioSwitch">
-                <span class="keyAction">M:</span>
-                audio .... <button class="audioState off"><span class="icon-volume-mute"></span> </button>
-            </li>
-            <li>
-                <span class="keyAction">F:</span>
-                fullscreen <button class="resize off" title="For max fullscreen, make your browser window fullscreen (F11), and then use this for fullscreen"><span class="icon-expand"></span></button>
-            </li>
-        </ul>
-    </div>
+	<div class="gameInstructions">
+		<h2>Game Menu</h2>
+		<ul class="goals">
+			<li><span>GOAL:</span> Become the world's most powerful ninja.</li>
+		</ul>
+		<ul>
+			<li>
+				<span class="keyAction">W:</span> up
+			</li>
+			<li>
+				<span class="keyAction">A:</span> left
+			</li>
+			<li>
+				<span class="keyAction">S:</span> down
+			</li>
+			<li class="padBot">
+				<span class="keyAction">D:</span> right
+			</li>
+			<li>
+				<span class="keyAction">J:</span> throw
+			</li>
+			<li>
+				<span class="keyAction">K:</span> jump
+			</li>
+			<li class="padBot">
+				<span class="keyAction">SPACEBAR</span> drop
+			</li>
+			<li>
+				<span class="keyAction">H:</span> heal
+			</li>
+			<li class="padBot">
+				<span class="keyAction">R:</span> restore
+			</li>
+			<li class="padBot">
+				<span class="keyAction">O:</span> menu
+			</li>
+			<li class="audioSwitch">
+				<span class="keyAction">M:</span>
+				audio .... <button class="audioState off"><iron-icon icon="av:volume-up"></iron-icon></button>
+			</li>
+			<li>
+				<span class="keyAction">F:</span>
+				fullscreen <button class="resize off" title="For max fullscreen, make your browser window fullscreen (F11), and then use this for fullscreen"><iron-icon icon="icons:fullscreen"></iron-icon></button>
+			</li>
+		</ul>
+	</div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="out/js/jonsQuest.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/node_modules/jquery-colorbox/jquery.colorbox-min.js"></script>
+	<script src="out/js/jonsQuest.js"></script>
 </body>
 </html>

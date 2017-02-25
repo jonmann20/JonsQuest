@@ -1,7 +1,4 @@
-/// <reference path="linker.js" />
-
-var Main = (function () {
-
+var Main = (function() {
     function setCanvasGlobals() {
         canvas = $("canvas")[0];
         ctx = canvas.getContext("2d");
@@ -20,7 +17,7 @@ var Main = (function () {
 
     function debug() {
         // dev enviroment
-        if (location.hostname === "jonsquest") {
+        if(location.hostname === "jonsquest") {
             window.DEBUG = true;
             window.DEBUG_OPT = {
                 'lvl': 3
@@ -39,7 +36,7 @@ var Main = (function () {
 
 
     return {
-        init: function () {
+        init: function() {
             setCanvasGlobals();
             loadingScreen();
 
@@ -49,15 +46,14 @@ var Main = (function () {
             HUD.init();
 
             // wait for google font
-            $(document).on("fontLoaded", function () {
+            $(document).on('fontLoaded', function() {
                 // game timer
-                setInterval(function () {
+                setInterval(function() {
                     ++game.actualTime;
                 }, 1000);
 
                 // start the game
                 game.start();
-
 
                 //debug();
             });
@@ -71,16 +67,18 @@ $(function () {
         google: {
             families: ['Press Start 2P']
         },
-        active: function () {
-            $(document).trigger("fontLoaded");
+        
+        active: function() {
+            $(document).trigger('fontLoaded');
         },
-        inactive: function () {
+        
+        inactive: function() {
             alert("There was a problem loading a font from google, some text may not render correctly (refreshing the page may fix the issue).");
             $(document).trigger("fontLoaded");
         }
     };
 
-    (function () {
+    (function() {
         var wf = document.createElement("script");
         wf.src = "//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
         wf.type = "text/javascript";
@@ -88,7 +86,6 @@ $(function () {
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(wf, s);
     })();
-
 
     Main.init();
 });

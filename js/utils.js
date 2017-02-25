@@ -1,24 +1,21 @@
-/// <reference path="linker.js" />
-
 /*
-    A place for generic math, set/get methods, and other small functions.
-    Also used for global data structures, enums, and functions.
-*/
-var utils = (function () {
+ * A place for generic math, set/get methods, and other small functions.
+ * Also used for global data structures, enums, and functions.
+ */
+var utils = (function() {
     var cboxMenu;
-
 
     return {
         /*
-            extends an oldObj into a newObj
-            while keeping certain objects properties in sync
-        */
-        extend: function (newObj, oldObj) {
+         * extends an oldObj into a newObj
+         * while keeping certain objects properties in sync
+         */
+        extend: function(newObj, oldObj) {
             // merge-copy current oldObj into newObj
             $.extend(newObj, oldObj);
 
             // force newObj to get oldObj's imgReady property
-            var prop = "imgReady";
+            var prop = 'imgReady';
             Object.defineProperty(newObj, prop, {
                 get: function () {
                     return oldObj[prop];
@@ -31,7 +28,7 @@ var utils = (function () {
 
         },
 
-        speed2scale: function(speed){
+        speed2scale: function(speed) {
             return -0.5*speed + 2;
         },
 
@@ -42,15 +39,15 @@ var utils = (function () {
             @param(number) max The max floating point number.
             @param(?number) precision The number of decimal precision places. (2 (hundredths place) by default)
         */
-        randF: function(min, max, precision){
-            if(typeof (precision) === "undefined") {
+        randF: function(min, max, precision) {
+            if(typeof (precision) === 'undefined') {
                 precision = 2; // hundredths place
             }
 
             return parseFloat(Math.min(min + (Math.random() * (max - min)), max).toFixed(precision));
         },
 
-        repeatAction: function (timeStep, numTimes, callback) {
+        repeatAction: function(timeStep, numTimes, callback) {
             var num = 0;
             var theAnimation = setInterval(function () {
                 if (num++ > numTimes) {
@@ -62,14 +59,14 @@ var utils = (function () {
             }, timeStep);
         },
 
-        deathSequence: function(){
+        deathSequence: function() {
             if (!game.over) {
                 game.over = true;
 
                 audio.heroDeath.play();
                 audio.bgMusic.muted = true;
 
-                setTimeout(function () {
+                setTimeout(function() {
                     Graphics.fadeCanvas(function() {
                         if((hero.lives - 1) < 0) {
                             alert("You Lose");
@@ -91,11 +88,11 @@ var utils = (function () {
             }
         },
 
-        degToRad: function(deg){
+        degToRad: function(deg) {
             return deg * 0.0174532925199432957;
         },
 
-        revFactorial: function(n){
+        revFactorial: function(n) {
             var count = 2;
             var result = n;
 
@@ -115,19 +112,19 @@ var utils = (function () {
             }
         },
 
-        getTimeObj: function (t) {
-            if (t === 0) {
-                return { min: "00", sec: "00" };
+        getTimeObj: function(t) {
+            if(t === 0) {
+                return {min: '00', sec: '00'};
             }
             
             var min = Math.floor(t / 60);
             var sec = t % 60;
 
-            if (sec < 10) {
+            if(sec < 10) {
                 sec = '0' + sec;
             }
 
-            if (min < 10) {
+            if(min < 10) {
                 min = '0' + min;
             }
 
@@ -137,13 +134,13 @@ var utils = (function () {
             };
         },
 
-        browser: function(){
+        browser: function() {
             var ua = navigator.userAgent,
                      tem,
                      M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*([\d\.]+)/i) || []
             ;
 
-            if (/trident/i.test(M[1])) {
+            if(/trident/i.test(M[1])) {
                 tem = /\brv[ :]+(\d+(\.\d+)?)/g.exec(ua) || [];
                     return 'IE '+(tem[1] || '');
             }
@@ -158,14 +155,14 @@ var utils = (function () {
 
         /**** Debug Printers ****/
         // A method to print to the console less frequently then within the game loop.
-        printSlow: function(msg){
-            if (game.actualTime % 10 === 0) {
+        printSlow: function(msg) {
+            if(game.actualTime % 10 === 0) {
                 console.log(msg);
             }
         },
 
-		printMouse: function () {
-		    $("canvas").on("mousemove", function (e) {
+		printMouse: function() {
+		    $('canvas').on('mousemove', function (e) {
 		        console.log(e.offsetX, e.offsetY);
 		    });
 		},
@@ -195,44 +192,39 @@ var utils = (function () {
 		    }
 		},
 
-		toggleMenu: function () {
-
-		    if ($("#colorbox").css("display") === "block") {
+		toggleMenu: function() {
+		    if ($('#colorbox').css('display') === 'block') {
 		        cboxMenu.colorbox.close();
 		    }
 		    else {
 		        cboxMenu = $.colorbox({
-		            html: $(".gameInstructions").html(),
+		            html: $('.gameInstructions').html(),
 		            width: 320,
 		            height: 530
 		        });
 		    }
 		},
 
-		toggleFullScreen: function () {
-
-
+		toggleFullScreen: function() {
 		    // fill browser window
-		    if ($("body").hasClass("fullscreen")) {
-		        $(".canvasWrap").css({
-		            width: "",
-		            marginLeft: ""
+		    if ($('body').hasClass('fullscreen')) {
+		        $('.canvasWrap').css({
+		            width: '',
+		            marginLeft: ''
 		        });
 
-		        $("body").removeClass("fullscreen");
+		        document.body.classList.remove('fullscreen');
 		    }
 		    else {
-		        $("body").addClass("fullscreen");
+		        document.body.classList.add('fullscreen');
 
 		        var scaledW = $(window).height() * 1.777778;
 
-		        $(".canvasWrap").css({
+		        $('.canvasWrap').css({
 		            width: scaledW,
 		            marginLeft: -scaledW / 2
 		        });
 		    }
-
-
 
             // fullscreen API
             //if (!document.fullscreenElement &&    // alternative standard method
@@ -288,13 +280,3 @@ var Color = Object.freeze({
     GOLD: "#ddaa13",
     ORANGE: "#ff6a00"
 });
-
-// global functions
-window.requestAnimFrame = (function () {
-    return window.requestAnimationFrame ||
-		   window.webkitRequestAnimationFrame ||
-
-		   function (callback) {
-		       setTimeout(callback, 16.6666666667); // 60fps fallback
-		   };
-})();
