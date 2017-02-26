@@ -81,9 +81,9 @@
 	<script src="out/js/jons-quest.js"></script>
 	
 	<script>
-		if('registerElement' in document &&
-		   'import' in document.createElement('link') &&
-		   'content' in document.createElement('template')
+		if(!('registerElement' in document) ||
+		   !('import' in document.createElement('link')) ||
+		   !('content' in document.createElement('template'))
 		){
 			var s = document.createElement('script');
 			s.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
