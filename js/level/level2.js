@@ -1,7 +1,4 @@
-﻿/// <reference path="../linker.js" />
-
-var lvl2 = (function () {
-
+var lvl2 = (() => {
     var floor1,
         hill,
         floorPlat,
@@ -173,7 +170,7 @@ var lvl2 = (function () {
         width: 5030,
 
 
-        init: function () {
+        init: () => {
             level.hiddenItems = 0;
 
             setObjs();
@@ -183,7 +180,7 @@ var lvl2 = (function () {
             setBackground();
         },
 
-        deinit: function(){
+        deinit: () => {
             doLadder = false;
         },
 
@@ -218,7 +215,7 @@ var lvl2 = (function () {
             }
         },
 
-        render: function() {
+        render: () => {
             Graphics.drawScaleBg(theScale);
         }
     };

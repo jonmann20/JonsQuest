@@ -1,6 +1,4 @@
-/// <reference path="../linker.js" />
-
-var KeyCode = Object.freeze({
+const KeyCode = Object.freeze({
 	ENTER: 13,
 	CTRL: 17,
 	A: 65,
@@ -107,7 +105,7 @@ var HeroInputComponent = function() {
 				doGravity = true;
 			}
 
-			if (doGravity && !hero.onLadder) {
+			if(doGravity && !hero.onLadder) {
 				var fixVy = hero.vY + game.gravity*2;
 
 				if (fixVy > maxVy) {

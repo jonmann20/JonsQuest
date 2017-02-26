@@ -1,6 +1,4 @@
-/// <reference path="../linker.js" />
-
-var game = (function () {
+let game = (() => {
 	var	avgFPS = 0,
 		renderTimePrev = 0,
 		renderTimeBtw = 16,
@@ -24,7 +22,7 @@ var game = (function () {
 //	    updateTimePrev = updateTimeCur;
 
 
-		if (!level.isCutscene && !level.isTransitioning && !game.over) {
+		if(!level.isCutscene && !level.isTransitioning && !game.over) {
 			hero.update();
 		}
 
@@ -33,7 +31,7 @@ var game = (function () {
 	
 	function render(renderTimeCur) {
 		// timers
-		if ((renderTimeCur - renderTimePrev) > 0) {
+		if((renderTimeCur - renderTimePrev) > 0) {
 			renderTimeBtw = renderTimeCur - renderTimePrev;
 		}
 		renderTimePrev = renderTimeCur;
@@ -43,9 +41,10 @@ var game = (function () {
 		// drawing
 		level.render();
 
-		if (!level.isCutscene) {
-			if(!game.over)
+		if(!level.isCutscene) {
+			if(!game.over) {
 				hero.render();
+			}
 
 			HUD.draw();
 			drawFPS();
@@ -55,30 +54,30 @@ var game = (function () {
 	function drawFPS(fps) {
 		fpsHistory.push(1000 / renderTimeBtw);
 		
-		if (game.totalTicks % 120 === 0) {
+		if(game.totalTicks % 120 === 0) {
 			var tot = 0,
 				i = fpsHistory.length
 			;
 			
-			while (--i) {
+			while(--i) {
 				tot += fpsHistory[i];
 			}
 			
-			if (fpsHistory.length > 0) {
+			if(fpsHistory.length > 0) {
 				avgFPS = Math.floor(tot / fpsHistory.length);
 			}
 			else {
 				avgFPS = 0;
 			}
 
-			while (fpsHistory.length > 0) {
+			while(fpsHistory.length > 0) {
 				fpsHistory.pop();
 			}
 		}
 		
-		ctx.fillStyle = "#ddd";
-		ctx.font = "11px 'Press Start 2P'";
-		ctx.fillText(avgFPS + " FPS", FULLW - 77, FULLH + 50);
+		ctx.fillStyle = '#ddd';
+		ctx.font = '11px "Press Start 2P"';
+		ctx.fillText(`${avgFPS} FPS`, FULLW - 77, FULLH + 50);
 	}
 	
 
@@ -91,8 +90,7 @@ var game = (function () {
 		totalTicks: 0,      // ticks are update iterations
 		actualTime: 0,
 
-
-		start: function () {
+		start: function() {
 			// update at fixed time interval
 			updateLoop = setInterval(function () {
 				++game.totalTicks;
@@ -117,7 +115,7 @@ var game = (function () {
 			render();
 		},
 
-		stop: function () {
+		stop: function() {
 			window.cancelAnimationFrame(renderLoop);
 			clearInterval(updateLoop);
 		}

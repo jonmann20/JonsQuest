@@ -2,7 +2,7 @@
  * A place for generic math, set/get methods, and other small functions.
  * Also used for global data structures, enums, and functions.
  */
-var utils = (function() {
+let utils = (() => {
     var cboxMenu;
 
     return {
@@ -33,12 +33,12 @@ var utils = (function() {
         },
 
         /*
-            Returns a random float between a and b.
-
-            @param(number) min The min floating point number.
-            @param(number) max The max floating point number.
-            @param(?number) precision The number of decimal precision places. (2 (hundredths place) by default)
-        */
+         * Returns a random float between a and b.
+         *
+         * @param(number) min The min floating point number.
+         * @param(number) max The max floating point number.
+         * @param(?number) precision The number of decimal precision places. (2 (hundredths place) by default)
+         */
         randF: function(min, max, precision) {
             if(typeof (precision) === 'undefined') {
                 precision = 2; // hundredths place
@@ -117,8 +117,8 @@ var utils = (function() {
                 return {min: '00', sec: '00'};
             }
             
-            var min = Math.floor(t / 60);
-            var sec = t % 60;
+            let min = Math.floor(t / 60);
+            let sec = t % 60;
 
             if(sec < 10) {
                 sec = '0' + sec;
@@ -135,7 +135,7 @@ var utils = (function() {
         },
 
         browser: function() {
-            var ua = navigator.userAgent,
+            let ua = navigator.userAgent,
                      tem,
                      M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*([\d\.]+)/i) || []
             ;
@@ -145,10 +145,11 @@ var utils = (function() {
                     return 'IE '+(tem[1] || '');
             }
 
-            M = M[2]? [M[1], M[2]]:[navigator.appName, navigator.appVersion, '-?'];
+            M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
 
-            if ((tem = ua.match(/version\/([\.\d]+)/i)) != null)
+            if((tem = ua.match(/version\/([\.\d]+)/i)) != null) {
                 M[2] = tem[1];
+            }
 
             return M.join(' ');
         },
@@ -198,7 +199,7 @@ var utils = (function() {
 		    }
 		    else {
 		        cboxMenu = $.colorbox({
-		            html: $('.gameInstructions').html(),
+		            html: document.querySelector('.gameInstructions').innerHTML,
 		            width: 320,
 		            height: 530
 		        });
@@ -207,7 +208,7 @@ var utils = (function() {
 
 		toggleFullScreen: function() {
 		    // fill browser window
-		    if ($('body').hasClass('fullscreen')) {
+		    if (document.body.classList.contains('fullscreen')) {
 		        $('.canvasWrap').css({
 		            width: '',
 		            marginLeft: ''
@@ -258,7 +259,7 @@ var utils = (function() {
 
 
 // global enums
-var Dir = Object.freeze({
+const Dir = Object.freeze({
     NONE: 0,
     TOP: 1,
     BOT: 2,
@@ -271,12 +272,12 @@ var Dir = Object.freeze({
     DOWN_RIGHT: 9
 });
 
-var Color = Object.freeze({
-    LIGHT_BROWN: "#c44525",
-    DARK_BROWN: "#672819",
-    LIGHT_GREEN: "#166a38",
-    SILVER: "#c0c0c0",
-    BLACK: "#000",
-    GOLD: "#ddaa13",
-    ORANGE: "#ff6a00"
+const Color = Object.freeze({
+    LIGHT_BROWN: '#c44525',
+    DARK_BROWN: '#672819',
+    LIGHT_GREEN: '#166a38',
+    SILVER: '#c0c0c0',
+    BLACK: '#000',
+    GOLD: '#ddaa13',
+    ORANGE: '#ff6a00'
 });

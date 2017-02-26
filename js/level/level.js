@@ -1,9 +1,5 @@
-/// <reference path="../linker.js" />
-
-var level = (function () {
-
+var level = (() => {
     var maxVy = 10; // applys to GameObj's and GameItem's
-
 
     /********** Update **********/
     function updateObjsView() {
@@ -246,13 +242,13 @@ var level = (function () {
         isTransitioning: false,
         
 
-        init: function() {
+        init: () => {
             level.reset();
             level.curLvl = new StartScreen();     // level '0'
         },
 
         // called before start of level
-        reset: function () {
+        reset: function() {
             // reset game stats
             game.over = false;
             game.actualTime = 0;
@@ -283,7 +279,7 @@ var level = (function () {
         },
 
         // called at end of level
-        complete: function () {
+        complete: function() {
             level.isTransitioning = true;
             audio.lvlComplete();
 
@@ -302,20 +298,20 @@ var level = (function () {
         },
 
         /******************** Update ********************/
-        update: function () {
-            if (!level.isTransitioning) {
-                if (game.lvl != 0) {
+        update: function() {
+            if(!level.isTransitioning) {
+                if(game.lvl != 0) {
                     updateItems();
                     updateEnemies();
 
                     // bg objects
                     var i = level.bg.length;
-                    while (i--) {
+                    while(i--) {
                         var dtX = 0.5 / level.bg[i].speed;
                         level.bg[i].pos.x -= dtX;
                         level.bg[i].distTraveled += dtX;
 
-                        if (level.bg[i].distTraveled > level.bg[i].distToTravel) {
+                        if(level.bg[i].distTraveled > level.bg[i].distToTravel) {
                             level.bg.splice(i, 1);
                             Graphics.spawnCloud(level.curLvl.width);
                         }
@@ -327,7 +323,7 @@ var level = (function () {
         },
 
         // fix positions relative to the "camera" view
-        updateView: function(){
+        updateView: () => {
             updateObjsView();
             updateItemsView();
             updateBgView();
@@ -336,7 +332,7 @@ var level = (function () {
 
 
         /******************** Render ********************/
-        render: function () {
+        render: () => {
             drawBg();
             drawObjs();
             drawItems();

@@ -1,7 +1,4 @@
-﻿/// <reference path="../linker.js" />
-
-var lvlComplete = (function () {
-
+var lvlComplete = (() => {
     function complete(debugLvl) {
         lastKeyDown = KeyCode.EMPTY;
         level.reset();

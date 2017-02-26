@@ -1,26 +1,23 @@
-/// <reference path="../linker.js" />
-
 // level '0'
 function StartScreen() {
     this.width = FULLW;
-
     level.isCutscene = true;
 }
 
 StartScreen.prototype = (function() {
     var copyTitle1 = "JON'S",
         copyTitle2 = "QUEST",
-        copyLine = String.fromCharCode("169") + " 2014 JON WIEDMANN"
+        copyLine = String.fromCharCode("169") + " 2017 JON WIEDMANN"
     ;
 
     return {
-        update: function(){
+        update: function() {
             if (lastKeyDown === KeyCode.ENTER) {
                 level.complete();
             }
         },
 
-        render: function(){
+        render: function() {
             //---- title
 
             // title 1

@@ -1,8 +1,5 @@
-﻿/// <reference path="../linker.js" />
-
 // A library of generic physics functions.
-var Physics = (function () {
-
+let Physics = (function () {
 
     return {
         // TODO: speed up by checking if a does NOT intersect with b (i.e. using OR)

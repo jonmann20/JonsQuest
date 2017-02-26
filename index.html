@@ -8,8 +8,8 @@
 
 	<meta property="og:title" content="Jon's Quest">
 	<meta property="og:type" content="website">
-	<meta property="og:url" content="http://jonmann20.github.io/games/jonsQuest/">
-	<meta property="og:image" content="http://jonmann20.github.io/games/dungeon/web/img/player/playerDown.png">
+	<meta property="og:url" content="http://jonw.me/games/jonsQuest/">
+	<meta property="og:image" content="http://jonw.me/games/dungeon/web/img/player/playerDown.png">
 	<meta property="og:description" content="Jon's Quest is a 2D html5 canvas game.">
 
 	<meta name="description" content="Jon's Quest is a 2D html5 canvas game.">
@@ -18,7 +18,7 @@
 	<title>Jon's Quest | Games</title>
 
 	<link href="/node_modules/jquery-colorbox/example3/colorbox.css" rel="stylesheet">
-	<link href="out/css/jons-quest-main.css" rel="stylesheet">
+	<link href="out/css/jons-quest.css" rel="stylesheet">
 	
 	<link rel="import" href="/bower_components/iron-icon/iron-icon.html">
 	<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
@@ -47,30 +47,18 @@
 			<li><span>GOAL:</span> Become the world's most powerful ninja.</li>
 		</ul>
 		<ul>
-			<li>
-				<span class="keyAction">W:</span> up
-			</li>
-			<li>
-				<span class="keyAction">A:</span> left
-			</li>
-			<li>
-				<span class="keyAction">S:</span> down
-			</li>
+			<li><span class="keyAction">W:</span> up</li>
+			<li><span class="keyAction">A:</span> left</li>
+			<li><span class="keyAction">S:</span> down</li>
 			<li class="padBot">
 				<span class="keyAction">D:</span> right
 			</li>
-			<li>
-				<span class="keyAction">J:</span> throw
-			</li>
-			<li>
-				<span class="keyAction">K:</span> jump
-			</li>
+			<li><span class="keyAction">J:</span> throw</li>
+			<li><span class="keyAction">K:</span> jump</li>
 			<li class="padBot">
 				<span class="keyAction">SPACEBAR</span> drop
 			</li>
-			<li>
-				<span class="keyAction">H:</span> heal
-			</li>
+			<li><span class="keyAction">H:</span> heal</li>
 			<li class="padBot">
 				<span class="keyAction">R:</span> restore
 			</li>
@@ -83,13 +71,24 @@
 			</li>
 			<li>
 				<span class="keyAction">F:</span>
-				fullscreen <button class="resize off" title="For max fullscreen, make your browser window fullscreen (F11), and then use this for fullscreen"><iron-icon icon="icons:fullscreen"></iron-icon></button>
+				fullscreen <button class="resize off" title="Fullscreen"><iron-icon icon="icons:fullscreen"></iron-icon></button>
 			</li>
 		</ul>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="/node_modules/jquery-colorbox/jquery.colorbox-min.js"></script>
-	<script src="out/js/jonsQuest.js"></script>
+	<script src="out/js/jons-quest.js"></script>
+	
+	<script>
+		if('registerElement' in document &&
+		   'import' in document.createElement('link') &&
+		   'content' in document.createElement('template')
+		){
+			var s = document.createElement('script');
+			s.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+			document.head.appendChild(s);
+		}
+	</script>
 </body>
 </html>

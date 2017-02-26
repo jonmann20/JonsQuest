@@ -1,11 +1,8 @@
-﻿/// <reference path="../linker.js" />
-
 function Level3() {
     this.init();
 }
 
-Level3.prototype = (function() {
-
+Level3.prototype = (() => {
     var boss;
 
     function setBackground() {

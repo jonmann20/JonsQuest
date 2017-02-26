@@ -1,10 +1,5 @@
-﻿/// <reference path="../linker.js" />
-
-/*
-    A library of generic graphics functions.
-*/
-var Graphics = (function () {
-
+// A library of generic graphics functions.
+var Graphics = (() => {
     var alpha = 1,
         canvasTransition = null,
         swellN = 250,
@@ -21,8 +16,8 @@ var Graphics = (function () {
         projectY: 11,
 
 
-        fadeCanvas: function (callback) {
-            if (utils.browser() === "MSIE 9.0") {
+        fadeCanvas: function(callback) {
+            if(utils.browser() === 'MSIE 9.0') {
                 callback();
             }
             else {
@@ -40,39 +35,39 @@ var Graphics = (function () {
             }
         },
 
-        blinkText: function (fontSize, x, y, str) {
-            str = (typeof (str) !== "undefined") ? str : "PRESS ENTER";
+        blinkText: function(fontSize, x, y, str) {
+            str = (typeof(str) !== 'undefined') ? str : 'PRESS ENTER';
 
-            if (Graphics.ticker >= 1.35 || Graphics.ticker <= Graphics.tickerStep) {
+            if(Graphics.ticker >= 1.35 || Graphics.ticker <= Graphics.tickerStep) {
                 Graphics.fadeOut = !Graphics.fadeOut;
             }
 
-            if (Graphics.ticker >= 1) {
+            if(Graphics.ticker >= 1) {
                 alpha = 1;
             }
-            else if (Graphics.ticker <= Graphics.tickerStep) {
+            else if(Graphics.ticker <= Graphics.tickerStep) {
                 alpha = 0;
             }
             else {
                 alpha = Graphics.ticker;
             }
 
-            ctx.font = fontSize + "px 'Press Start 2P'";
-            var tmpW = ctx.measureText(str).width;
-            ctx.fillStyle = "rgba(233, 233, 233," + alpha + ')';
+            ctx.font = `${fontSize}px "Press Start 2P"`;
+            const tmpW = ctx.measureText(str).width;
+            ctx.fillStyle = `rgba(233, 233, 233, ${alpha})`;
             ctx.fillText(str, x - tmpW / 2, y);
         },
 
         /*
-            Converts a rectangle into a 'skewed rectangle' polygon
-
-            @param(number) x
-            @param(number) y
-            @param(number) w
-            @param(number) h
-            @return (SAT.Polygon)
-        */
-        getSkewedRect: function (x, y, w, h) {
+         * Converts a rectangle into a 'skewed rectangle' polygon
+         *
+         * @param(number) x
+         * @param(number) y
+         * @param(number) w
+         * @param(number) h
+         * @return (SAT.Polygon)
+         */
+        getSkewedRect: function(x, y, w, h) {
             y += Graphics.projectY / 2;
 
             var poly = new SAT.Polygon(new SAT.Vector(x, y), [
@@ -113,15 +108,15 @@ var Graphics = (function () {
             return poly;
         },
 
-        setClouds: function(width){
-            var x = 0;
+        setClouds: (width) => {
+            let x = 0;
             
             while(x < width) {
                 x = Graphics.spawnCloud(x);
             }
         },
 
-        spawnCloud: function (x) {
+        spawnCloud: function(x) {
             var y = Math.floor(Math.random() * cloundMaxY);
             var speed = utils.randF(2, 3.3, 1);
             var width = utils.speed2scale(speed) * 120; // 120px is clound.png width; TODO: fix GameObj image width calculation
@@ -138,7 +133,7 @@ var Graphics = (function () {
             return x;
         },
 
-        drawLadder: function (platform) {
+        drawLadder: function(platform) {
             var x = platform.pos.x,
                 y = platform.pos.y,
                 w = platform.edges[0].x,
@@ -151,7 +146,7 @@ var Graphics = (function () {
             ctx.fillRect(x + w-5, y, 5, h);
 
             // rungs
-            for (var i = 13; i < h; i+=20) {
+            for(var i=13; i < h; i+=20) {
                 ctx.fillRect(x, y+i, w, 8);
             }
         },
@@ -196,7 +191,7 @@ var Graphics = (function () {
             return theScale;
         },
 
-        drawScale: function (platform) {
+        drawScale: function(platform) {
             var x = platform.pos.x,
                 y = platform.pos.y,
                 w = platform.edges[0].x,
@@ -233,7 +228,7 @@ var Graphics = (function () {
         },
 
         drawScaleBg: function(theScale){
-            ctx.strokeStyle = "#000";
+            ctx.strokeStyle = '#000';
             ctx.lineWidth = 10;
 
             // hBar
@@ -251,36 +246,37 @@ var Graphics = (function () {
         },
 
         /*
-            @param(SAT.Polygon) poly An SAT.Polygon.
-            @param(?Color) fillStyle The fill style of the polygon
-            @param(?number, ?number) trans A translated x and y dimension.
-        */
+         * @param(SAT.Polygon) poly An SAT.Polygon.
+         * @param(?Color) fillStyle The fill style of the polygon
+         * @param(?number, ?number) trans A translated x and y dimension.
+         */
         drawPoly: function(poly, fillStyle, trans) {
-            var y = poly.pos.y - Graphics.projectY;
-            var x = poly.pos.x;
+            let y = poly.pos.y - Graphics.projectY;
+            let x = poly.pos.x;
 
-            if(typeof (trans) !== "undefined") {
+            if(typeof(trans) !== 'undefined') {
                 x += trans.x;
                 y += trans.y;
             }
 
-            ctx.fillStyle = (typeof(fillStyle) !== "undefined") ? fillStyle : "orange";
+            ctx.fillStyle = (typeof(fillStyle) !== 'undefined') ? fillStyle : 'orange';
             ctx.beginPath();
             ctx.moveTo(x, y);
 
-            for(var i = 1; i < poly.points.length; ++i) {
-                ctx.lineTo(x + poly.points[i].x, y + poly.points[i].y);
+            for(let point of poly.points) {
+                ctx.lineTo(x + point.x, y + point.y);
             }
 
             ctx.closePath();
             ctx.fill();
         },
 
-        drawHill: function(poly) {
-            for(var i = 0; i < game.padFloor - 15; ++i) {
-                Graphics.drawPoly(poly, Color.LIGHT_BROWN, { x: 0, y: i });
+        drawHill: (poly) => {
+            for(let i=0; i < game.padFloor - 15; ++i) {
+                Graphics.drawPoly(poly, Color.LIGHT_BROWN, {x: 0, y: i});
             }
-            Graphics.drawPoly(poly, Color.DARK_BROWN, { x: Graphics.projectX, y: game.padFloor});
+            
+            Graphics.drawPoly(poly, Color.DARK_BROWN, {x: Graphics.projectX, y: game.padFloor});
             //Graphics.drawPoly(poly, Color.DARK_BROWN, { x: 10, y: game.padFloor -2 });
         },
 
@@ -308,7 +304,7 @@ var Graphics = (function () {
             return new SAT.Polygon(new SAT.V(x, y), arr);
         },
 
-        drawPlatform: function (poly) {
+        drawPlatform: function(poly) {
             var y = poly.pos.y - Graphics.projectY / 2;
 
             // top
@@ -334,7 +330,7 @@ var Graphics = (function () {
             ctx.fill();
         },
 
-        drawPlatformStatus: function (platform) {
+        drawPlatformStatus: function(platform) {
             var x = platform.pos.x,
                 y = platform.pos.y,
                 w = platform.w,
@@ -347,9 +343,9 @@ var Graphics = (function () {
 
             ctx.lineWidth = 3;
 
-            if (platform.holdingItem !== null && platform.holdingItem.type === JQObject.CRATE) {
+            if(platform.holdingItem !== null && platform.holdingItem.type === JQObject.CRATE) {
                 // draw check mark
-                ctx.strokeStyle = "green";
+                ctx.strokeStyle = 'green';
 
                 --midY;
                 ctx.beginPath();
@@ -363,7 +359,7 @@ var Graphics = (function () {
             }
             else {
                 // draw 'X'
-                ctx.strokeStyle = "red";
+                ctx.strokeStyle = 'red';
 
                 ctx.beginPath();
                 ctx.moveTo(midX, midY);
@@ -376,7 +372,7 @@ var Graphics = (function () {
         },
 
         // @param(GameObj) gObj A game object.
-        drawDoor: function (gObj) {
+        drawDoor: function(gObj) {
             // alias
             var x = gObj.pos.x;
             var y = gObj.pos.y;
@@ -407,7 +403,7 @@ var Graphics = (function () {
             ctx.fillText("EXIT", x - 18, y - 5);
         },
 
-        getDoorBgGrad: function(){
+        getDoorBgGrad: function() {
             var grad = ctx.createRadialGradient(
                 level.bgColor.gradX,
                 level.bgColor.gradY,
@@ -436,8 +432,8 @@ var Graphics = (function () {
             return grad;
         },
 
-        drawEllipse: function (x, y, w, h) {
-            var kappa = 0.5522848,
+        drawEllipse: (x, y, w, h) => {
+            const kappa = 0.5522848,
 				ox = (w / 2) * kappa, // control point offset horizontal
 				oy = (h / 2) * kappa, // control point offset vertical
 				xe = x + w, // x-end
@@ -456,7 +452,7 @@ var Graphics = (function () {
             ctx.fill();
         },
 
-        drawRotate: function (img, x, y, angle) {
+        drawRotate: (img, x, y, angle) => {
             ctx.save();
 
             ctx.translate(x, y);								// move co-ord sys to img origin
@@ -506,8 +502,6 @@ var Graphics = (function () {
 //}, function (num) {
 //    lvl[num].status = true;
 //});
-
-
 
 
 //var wasClicked = false;

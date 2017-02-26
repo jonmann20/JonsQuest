@@ -1,7 +1,4 @@
-/// <reference path="../linker.js" />
-
-var lvl1 = (function () {
-
+var lvl1 = (() => {
     var hiddenCash,
 		door,
         ladder,
@@ -50,7 +47,7 @@ var lvl1 = (function () {
     function setItems() {
         // crates
         var crate = [];
-        for (var i = 0; i < 3; ++i) {
+        for(let i=0; i < 3; ++i) {
             crate.push(
                 new GameItem(
                     new GameObj(JQObject.CRATE, 446, FULLH - game.padFloor - 26 + 5, 34, 37, "crate.png"),
@@ -88,7 +85,7 @@ var lvl1 = (function () {
         width: 2710,
 
 
-        init: function () {
+        init: function() {
             level.hiddenItems = 1;
 
             setObjs();
@@ -98,14 +95,14 @@ var lvl1 = (function () {
             setBackground();
         },
 
-        deinit: function(){
+        deinit: function() {
             hiddenCash = null;
             door = null;
             ladder = null;
             doLadder = false;
         },
 
-        update: function () {
+        update: function() {
             if(doLadder) {
                 hero.onLadder = SAT.testPolygonPolygon(hero, ladder);
             }
@@ -125,12 +122,12 @@ var lvl1 = (function () {
             }
 
             // door
-            if (!game.over && Physics.isCollision(hero, door, 0)) {     // TODO: why checking game.over???
+            if(!game.over && Physics.isCollision(hero, door, 0)) {     // TODO: why checking game.over???
                 level.complete();
             }
         },
 
-        render: function() {
+        render: () => {
             Graphics.drawScaleBg(theScale);
         }
     };

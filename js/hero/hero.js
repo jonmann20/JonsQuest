@@ -1,4 +1,4 @@
-/// <reference path="../linker.js" />
+'use strict';
 
 var Shuriken = {
     w: 31,
@@ -7,7 +7,7 @@ var Shuriken = {
 };
 
 // The hero object.  TODO: convert to be of GameObj type
-var hero = (function () {
+var hero = (() => {
     var input = null,           // the hero input component
         graphics = null,        // the hero graphics component
         physics = null,         // the hero physics component
@@ -21,36 +21,37 @@ var hero = (function () {
 		
 	/*********************** Update ***********************/
     function checkHealth() {
-        if (hero.invincible)
+        if(hero.invincible) {
             --invincibleTimer;
+        }
 
-        if (invincibleTimer <= 0) {
+        if(invincibleTimer <= 0) {
             hero.invincible = false;
             invincibleTimer = invincibleTimer0;
         }
         
-        if (hero.health <= 0 && !game.over) {
+        if(hero.health <= 0 && !game.over) {
             utils.deathSequence();
         }
     }
 
     function getSpritePos() {
-		var pos = {x: 0, y: 0};
+		let pos = {x: 0, y: 0};
 		
-		if (hero.isHolding && hero.vX === 0) {
-			pos = spriteArr["playerDown"];
+		if(hero.isHolding && hero.vX === 0) {
+			pos = spriteArr['playerDown'];
 		}
-		else if (hero.onLadder) {               // TODO: check if holding crate (shouldn't be allowed on ladder)
-		    pos = spriteArr["playerUp"];
+		else if(hero.onLadder) {               // TODO: check if holding crate (shouldn't be allowed on ladder)
+		    pos = spriteArr['playerUp'];
 		}
-		else if (hero.dir === Dir.RIGHT || hero.dir === Dir.LEFT) {
-		    var dirR = (hero.dir === Dir.RIGHT);
-		    var theDir = "player" + (dirR ? "Right" : "Left");
+		else if(hero.dir === Dir.RIGHT || hero.dir === Dir.LEFT) {
+		    let dirR = (hero.dir === Dir.RIGHT);
+		    let theDir = 'player' + (dirR ? 'Right' : 'Left');
 
-		    if (dirR && hero.vX > 0 ||  // right
+		    if(dirR && hero.vX > 0 ||  // right
 		        !dirR && hero.vX < 0    // left
-            ) {
-		        var runTimer = (game.totalTicks % 96);
+            ){
+		        let runTimer = (game.totalTicks % 96);
 
 		        if(!hero.isOnObj){
 		            pos = spriteArr[theDir + "_Run1"];
@@ -65,7 +66,7 @@ var hero = (function () {
 		                audio.step.play();
 		            }
 		        }
-		        else if (runTimer >= 24 && runTimer < 48) {
+		        else if(runTimer >= 24 && runTimer < 48) {
 		            pos = spriteArr[theDir + "_Run2"];
 		        }
 		        else if(runTimer >= 48 && runTimer < 72){
@@ -90,47 +91,47 @@ var hero = (function () {
 		else {
 		    hero.idleTime = 0;
 
-		    if (hero.isHolding) {
+		    if(hero.isHolding) {
 		        hero.curItem.pos.y = hero.pos.y + 20;
 		    }
 		}
 
-		if (hero.idleTime > 210) {
+		if(hero.idleTime > 210) {
 		    var foo = hero.idleTime % 200;
 		    
-		    if (foo >= 0 && foo <= 50 || foo > 100 && foo <= 150)
-		        pos = spriteArr["playerDown"];
-		    else if (foo > 50 && foo <= 100) {
-		        pos = spriteArr["playerDown_breatheIn"];
+		    if(foo >= 0 && foo <= 50 || foo > 100 && foo <= 150) {
+		        pos = spriteArr['playerDown'];
+		    }
+		    else if(foo > 50 && foo <= 100) {
+		        pos = spriteArr['playerDown_breatheIn'];
 
-		        if (hero.isHolding) {
+		        if(hero.isHolding) {
 		            hero.curItem.pos.y = hero.pos.y + 18;
 		        }
 		    }
-		    else if (foo > 150 && foo <= 200) {
-		        pos = spriteArr["playerDown_breatheOut"];
+		    else if(foo > 150 && foo <= 200) {
+		        pos = spriteArr['playerDown_breatheOut'];
 
-		        if (hero.isHolding) {
+		        if(hero.isHolding) {
 		            hero.curItem.pos.y = hero.pos.y + 22;
 		        }
 		    }
 		}
 
         // invincible
-		var inv = invincibleTimer % 40;
+		const inv = invincibleTimer % 40;
 		
 		if(hero.invincible && (inv >= 0 && inv <= 16)){
 			pos = {x: -1, y: -1};
 		}
-
 		
 		hero.sx = pos.x;
 		hero.sy = pos.y;
 	}
 	
 	/*********************** Render ***********************/
-	function drawHero(){
-	    if (imgReady && hero.sx >= 0 && hero.sy >= 0) {
+	function drawHero() {
+	    if(imgReady && hero.sx >= 0 && hero.sy >= 0) {
 		    ctx.drawImage(img, hero.sx, hero.sy, hero.w, hero.h, Math.round(hero.pos.x), Math.round(hero.pos.y), hero.w, hero.h);
     	}
 	}
@@ -179,17 +180,17 @@ var hero = (function () {
 		bulletArr: [],
 		
 
-		init: function(){
+		init: function() {
 			img = new Image();
-			img.onload = function () { imgReady = true; };
-			img.src = "img/sprites/player/player.png";
+			img.onload = () => {imgReady = true;};
+			img.src = 'img/sprites/player/player.png';
 			
 			// grab texturePacker's sprite coords
-			$.get("img/sprites/player/player.xml", function(xml){
-				var wrap = $(xml).find("sprite");
+			$.get('img/sprites/player/player.xml', function(xml) {
+				let wrap = $(xml).find('sprite');
 				
-				$(wrap).each(function(){
-					var name = $(this).attr('n'),
+				$(wrap).each(function() {
+					let name = $(this).attr('n'),
 						x = $(this).attr('x'),
 						y = $(this).attr('y');
 					
@@ -201,13 +202,13 @@ var hero = (function () {
 			
 			input = HeroInputComponent();
 			physics = HeroPhysicsComponent();
-			graphics = HeroGraphicsComponent();
+			graphics = new HeroGraphicsComponent();
 
             // setup hero bounding box for collision detection
 			$.extend(hero, new SAT.Box(new SAT.Vector(0, 0), hero.w, hero.h).toPolygon());
 		},
 		
-		update: function () {
+		update: () => {
 		    input.check();                      // updates velocities
 			physics.updatePosition();          // updates positions
 			physics.checkCollision();          // fix positions
@@ -216,13 +217,13 @@ var hero = (function () {
 			getSpritePos();
 		},
 	
-		render: function () {
+		render: () => {
 		    drawHero();
 		    graphics.drawBullets();
 		    drawAfterHero();
 		},
 
-		landed: function(y) {
+		landed: (y) => {
 		    hero.isOnObj = true;
 		    hero.isJumping = false;
 		    hero.vY = 0;

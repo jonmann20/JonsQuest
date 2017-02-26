@@ -1,6 +1,4 @@
-/// <reference path="../linker.js" />
-
-var JQEnemy = Object.freeze({
+const JQEnemy = Object.freeze({
     STILL: 0,
     PATROL: 1,
     FOLLOW: 2
@@ -8,17 +6,17 @@ var JQEnemy = Object.freeze({
 
 
 /*
-    Enemy extends GameObj
-
-    @param(GameObj) gObj A game object (super class).
-    @param(EnemyType) enemy_t The type of the enemy.
-    @param(number) health The hp of the enemy.
-    @param(number) leftXBound The left x coordinate boundary.
-    @param(number) rightXBound The right x coordinate boundary.
-    @param(bool?) active Is the enemy allowed to move?
-    @constructor
-*/
-var Enemy = function (gObj, enemy_t, health, leftXBound, rightXBound, active) {
+ * Enemy extends GameObj
+ *
+ * @param(GameObj) gObj A game object (super class).
+ * @param(EnemyType) enemy_t The type of the enemy.
+ * @param(number) health The hp of the enemy.
+ * @param(number) leftXBound The left x coordinate boundary.
+ * @param(number) rightXBound The right x coordinate boundary.
+ * @param(bool?) active Is the enemy allowed to move?
+ * @constructor
+ */
+var Enemy = function(gObj, enemy_t, health, leftXBound, rightXBound, active) {
     utils.extend(this, gObj);
 
     this.initX = this.pos.x;
@@ -56,7 +54,7 @@ var Enemy = function (gObj, enemy_t, health, leftXBound, rightXBound, active) {
             }
 
             ctx.save();
-            if (this.deadOnScreen) {
+            if(this.deadOnScreen) {
                 ctx.globalAlpha = 0.3;
             }
 
@@ -67,8 +65,7 @@ var Enemy = function (gObj, enemy_t, health, leftXBound, rightXBound, active) {
 };
 
 Enemy.prototype = {
-
-    update: function () {
+    update: function() {
         if (this.deadOnScreen) {
             if(this.enemy_t === JQEnemy.STILL) {
                 this.deadOnScreen = false;
@@ -91,28 +88,32 @@ Enemy.prototype = {
 
     // TODO: make private
     movement: function() {
-        if (this.enemy_t === JQEnemy.PATROL) {
-            if (this.pos.x + hero.lvlX <= this.leftXBound)
+        if(this.enemy_t === JQEnemy.PATROL) {
+            if(this.pos.x + hero.lvlX <= this.leftXBound) {
                 this.dir = Dir.RIGHT;
-            else if (this.pos.x + hero.lvlX >= this.rightXBound)
+            }
+            else if(this.pos.x + hero.lvlX >= this.rightXBound) {
                 this.dir = Dir.LEFT;
+            }
 
-            if (this.dir === Dir.RIGHT) {
+            if(this.dir === Dir.RIGHT) {
                 ++this.pos.x;
             }
             else {
                 --this.pos.x;
             }
         }
-        else if (this.enemy_t === JQEnemy.FOLLOW) {
-            if (this.pos.x < hero.pos.x)
+        else if(this.enemy_t === JQEnemy.FOLLOW) {
+            if(this.pos.x < hero.pos.x) {
                 ++this.pos.x;
-            else if (this.pos.x > hero.pos.x)
+            }
+            else if(this.pos.x > hero.pos.x) {
                 --this.pos.x;
+            }
         }
     },
 
-    death: function () {
+    death: function() {
         this.clearDir = hero.dir;
 
         audio.enemyDeath.play();
