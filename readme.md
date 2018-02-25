@@ -16,11 +16,6 @@ A 2D platformer in JavaScript.
 ![cyborg](http://jonmann20.github.io/games/jonsQuest/img/cyborgBnW.png)
 ![crate](http://jonmann20.github.io/games/jonsQuest/img/crate.png)
 
-Dependecies
------------
-* Jquery Colorbox (must be available at `node_modules/jquery-colorbox`)
-* `<iron-icon>` and `<iron-icons>` (must be available at `bower_components/iron-icon` and `bower_components/iron-icons` respectively)
-
 Format guidlines
 ----------------
 * capitalized word:

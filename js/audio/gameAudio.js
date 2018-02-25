@@ -114,23 +114,24 @@ class GameAudio {
     }
 
     handleMuteButton() {
-        // TODO: fix on/off class bug
-        let audioState = document.querySelector('.audioState');
+        let audioStates = Array.from(document.querySelectorAll('.audioState'));
         
-        if(audioState.classList.contains('off')) {
-            $('.audioState iron-icon').attr('icon', 'av:volume-up');
-            audioState.classList.remove('off');
-            audioState.classList.add('on');
-            
-            this.mute(false);
-        }
-        else {
-            $('.audioState iron-icon').attr('icon', 'av:volume-off');
-            audioState.classList.remove('on');
-            audioState.classList.add('off');
-
-            this.mute(true);
-        }
+        audioStates.forEach(audioState => {
+            if(audioState.classList.contains('off')) {
+                $('.audioState iron-icon').attr('icon', 'i:volume-up');
+                audioState.classList.remove('off');
+                audioState.classList.add('on');
+                
+                this.mute(false);
+            }
+            else {
+                $('.audioState iron-icon').attr('icon', 'i:volume-off');
+                audioState.classList.remove('on');
+                audioState.classList.add('off');
+    
+                this.mute(true);
+            }
+        });
     }
 
     mute(onOrOff) {

@@ -29,11 +29,11 @@ var HeroInputComponent = function() {
 	$(document).on('click', '.resize', function () {
 		if ($(this).hasClass('off')) {
 			$(this).removeClass('off').addClass('on');
-			$(this).children('iron-icon').prop('icon', 'icons:fullscreen-exit');
+			$(this).children('iron-icon').prop('icon', 'i:fullscreen-exit');
 		}
 		else if($(this).hasClass('on')) {
 			$(this).removeClass('on').addClass('off');
-			$(this).children('iron-icon').prop('icon', 'icons:fullscreen');
+			$(this).children('iron-icon').prop('icon', 'i:fullscreen');
 		}
 
 		utils.toggleFullScreen();

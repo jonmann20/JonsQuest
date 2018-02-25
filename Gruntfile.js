@@ -1,6 +1,6 @@
-module.exports = function(grunt) {
+module.exports = (grunt) => {
 	grunt.initConfig({
-		clean: ['out/css', 'out/js'],
+		clean: ['out/**'],
 
 		connect: {
 			dev: {
@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 			srv: {
 				options: {
 					port: 8080,
+					base: 'out',
 					keepalive: true
 				}
 			}
@@ -46,7 +47,7 @@ module.exports = function(grunt) {
 					'js/hero/heroInput.js',
 					'js/main.js'
 				],
-				dest: 'out/js/jons-quest.js'
+				dest: 'js/build/jons-quest.js'
 			},
 			
 			jsPrd1: {
@@ -67,27 +68,26 @@ module.exports = function(grunt) {
 			}
 		},
 		
-		babel: {
-	        options: {
-	            sourceMap: true,
-	            presets: ['es2015']
-	        },
-	        
-	        dist: {
-	            files: {
-	                '<%= concat_sourcemap.js.dest %>': '<%= concat_sourcemap.js.dest %>'
-	            }
-	        }
-	    },
-
 		copy: {
 			main: {
 				files: [{
 					expand: true,
-					src: ["img/**", "audio/**"],
-					dest: "out/"
+					src: [
+						'img/**',
+						'audio/**',
+						'index.html',
+						'node_modules/jquery-colorbox/**',
+						'node_modules/@webcomponents/webcomponentsjs/**',
+						'assets/**',
+						'js/build/**'
+					],
+					dest: 'out/'
 				}]
 			}
+		},
+		
+		cssmin: {
+			"<%= concat_sourcemap.css.dest %>": "<%= concat_sourcemap.css.src %>"
 		},
 		
 		watch: {
@@ -105,6 +105,10 @@ module.exports = function(grunt) {
 				tasks: ['concat_sourcemap:css']
 			}
 		},
+		
+		webpack: {
+			main: require('./webpack.config')
+		},
 
 		uglify: {
 			options: {
@@ -118,23 +122,19 @@ module.exports = function(grunt) {
 					'<%= concat_sourcemap.js.dest %>': '<%= concat_sourcemap.js.dest %>'
 				}
 			}
-		},
-
-		cssmin: {
-			"<%= concat_sourcemap.css.dest %>": "<%= concat_sourcemap.css.src %>"
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-babel');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-concat-sourcemap');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-uglify-es');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-webpack');
 
 	grunt.registerTask('default', ['concat_sourcemap:js', 'concat_sourcemap:css', 'connect:dev', 'watch']);
-	grunt.registerTask('prd', ['concat_sourcemap:jsPrd1', 'babel', 'uglify', 'concat_sourcemap:jsPrd2', 'cssmin', 'copy']);
+	grunt.registerTask('prd', ['webpack', 'concat_sourcemap:jsPrd1', 'uglify', 'concat_sourcemap:jsPrd2', 'cssmin', 'copy']);
 	grunt.registerTask('srv', ['connect:srv']);
 };
